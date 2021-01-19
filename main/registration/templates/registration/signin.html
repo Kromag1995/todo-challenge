@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Signin</title>
+  </head>
+  <body>
+    <div>
+        <form action="/signin/" method="POST">
+          {% csrf_token %}
+          <input  type="text" placeholder="username" maxlength = 200 name="username">
+          <input  type="email" placeholder="test@algomail.com" maxlength = 200 name="email">
+          <input  type="password" placeholder="password"  maxlength = 200 name="password">
+          <input  type="submit" value="login">
+        </form>
+        {% if Error %}
+          <h3>Hubo un error al crear la cuenta, por favor intente nuevamente</h3>
+        {% endif %}
+    </div>
+    <p>Si ya tenes una cuenta podes logearte <a href="/login/">aca</a></p>
+  </body>
+</html>

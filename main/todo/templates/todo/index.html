@@ -6,11 +6,47 @@
   </head>
   <body>
     <div>
+      {% if user.is_authenticated %}
+        <div>
+          <h1>Crear Nueva Tarea</h1>
+          <form action="/addTodo/" method="POST">
+            {% csrf_token %}
+            <input  type="text" placeholder="Titulo" maxlength = 200 name="title" required>
+            <input  type="text" placeholder="Texto"  maxlength = 2000 name="text">
+            <input  type="date" name="tiempo">
+            <input  type="submit" value="Crear">
+          </form>
+        </div>
+        <h1>Tus Tareas</h1>
+        <h2>Filtrar</h2>
+        <form action="/allTodo/" method="GET">
+          <input  type="text" placeholder="Titulo" maxlength = 200 name="title">
+          <input  type="text" placeholder="Texto"  maxlength = 2000 name="text">
+          <input  type="date" name="desde">
+          <input  type="date" name="hasta">
+          <input  type="submit" value="Buscar">
+        </form>
         {% for todo in todos %}
-            <h1>{{todo.text}}</h1>
-            <p>{{todo.title}}</p>
-            <p>{{todo.completed}}</p>
+        <div>
+          <h3>{{todo.title}}</h3>
+          <h4>{{todo.text}}</h4>
+          <form action="/checkTodo/" method="POST">
+            {% csrf_token %}
+            {% if todo.completed %}
+              <input  type="submit" value="Uncheck" name="{{todo.id}}">
+            {% else %}
+              <input  type="submit" value="Check" name="{{todo.id}}">
+            {% endif %}
+          </form>
+          <form action="/deleteTodo/" method="POST">
+            {% csrf_token %}
+            <input  type="submit" value="Borrar" name="{{todo.id}}">
+          </form>
+        </div>
         {% endfor %}
+      {% else %}
+        <h1>Logearse</h1>
+      {% endif %}
     </div>
   </body>
 </html>

@@ -1,35 +1,23 @@
-# Invera ToDo-List Challenge (Python/Django Jr-SSr)
+# Requerimientos
+Esto fue creado usadon python 3.8.7 con django 3.1.5.
 
-El propósito de esta prueba es conocer tu capacidad para crear una pequeña aplicación funcional en un límite de tiempo. A continuación, encontrarás las funciones, los requisitos y los puntos clave que debés tener en cuenta durante el desarrollo.
+# Modelos
+Se creo un modelo ToDo. El mismo esta asocidado a un usuario, tiene un titulo y texto, tiene un valor booleano que indica si esta completado o no y tiene un timestamp que indica cuando fue creado.
 
-## Qué queremos que hagas:
+# Views
+La view principal es allTodo, en la misma se muestran todos los ToDo's relacionados con el usuario creado.
+Se puede crear nuevos ToDo's con un titulo, text y si lo decea especificar el timestamp (Esto es para propositos de verificar el correcto funcionamiento del programa). No se pueden crear ToDos sin titulo.
+Tambien se tiene la posibilidad de filtrar los resultados segun el titulo, texto, se puede especificar un rango de fechas creadas de los todos. Si se indican solo una fecha se indicara se excluye todo lo anterior, para la primera fecha, o todo lo posterior para la segunda (por ejemplo si solo se indicara la segunda fecha siendo 19/01/2021 excluiria todos los todos creados despues de esa fecha).
+Para cada ToDo se tiene un boton check/uncheck que permite marcar una tarea como completada, o desmarcarla si se lo desea. Tambien cada Todo tiene un boton para borrarse.
 
-- El Challenge consiste en crear una aplicación web sencilla que permita a los usuarios crear y mantener una lista de tareas.
-- La entrega del resultado será en un nuevo fork de este repo y deberás hacer una pequeña demo del funcionamiento y desarrollo del proyecto ante un super comité de las más grandes mentes maestras de Invera, o a un par de devs, lo que sea más fácil de conseguir.
-- Podes contactarnos en caso que tengas alguna consulta.
+La view de addTodo se encarga de crear un ToDo. Si se pasa un fecha entonces se toma esa fecha como la fecha de creacion del todo.
 
-## Objetivos:
+La view de deleteTodo elimina el todo correspondiente.
 
-El usuario de la aplicación tiene que ser capaz de:
+La view de checkTodo marca el todo correspondiente como completado/sin completar segun corresponda.
 
-- Crear una tarea
-- Eliminar una tarea
-- Marcar tareas como completadas
-- Poder ver una lista de todas las tareas existentes
-- Filtrar/buscar tareas por fecha de creación y/o por el contenido de la misma
+Se creo una app con views para registro/login/logout de usuario para que se pueda probar los ToDos con diferentes usuarios.
 
-## Qué evaluamos:
+# Como levantar la apliacion
 
-- Desarrollo utilizando Python, Django. No es necesario crear un Front-End, pero sí es necesario tener una API que permita cumplir con los objetivos de arriba.
-- Calidad y arquitectura de código. Facilidad de lectura y mantenimiento del código. Estándares seguidos.
-- [Bonus] Manejo de logs.
-- [Bonus] Creación de tests (unitarias y de integración)
-- [Bonus] Unificar la solución propuesta en una imagen de Docker por repositorio para poder ser ejecutada en cualquier ambiente (si aplica para full stack).
-
-## Requerimientos de entrega:
-
-- Hacer un fork del proyecto y pushearlo en github. Puede ser privado.
-- La solución debe correr correctamente.
-- El Readme debe contener todas las instrucciones para poder levantar la aplicación, en caso de ser necesario, y explicar cómo se usa.
-- Disponibilidad para realizar una pequeña demo del proyecto al finalizar el challenge.
-- Tiempo para la entrega: Aproximadamente 7 días.
+Desde la carpeta main donde se encuentra el archivo manage.py  correr python manage.py runserver y dirirse a localhost:8000/singin. De ahi se creara un usuario y luego se redireccionara a /allTodo/ (caso de ejemplo username: Test1234, email: Test1234@testmail.com, password: Contraseña23).
